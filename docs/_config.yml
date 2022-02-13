@@ -1,6 +1,6 @@
 # Site settings
 title: Firat Kizilirmak
-baseurl: "/fk"
+baseurl:
 url: "https://firatkizilirmakk.github.io"
 google_analytics: # Tracking ID, e.g. "UA-000000-01"
 

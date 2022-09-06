@@ -1,63 +1,60 @@
-# Site settings
-title: Firat Kizilirmak
-baseurl:
-url: "https://firatkizilirmakk.github.io"
-google_analytics: # Tracking ID, e.g. "UA-000000-01"
+title: Blog of Fırat Kızılırmak
+author: firatkizilirmakk
+email: firatkizilirmak34@gmail.com
+description: > # this means to ignore newlines until "show_exerpts:"
+  An awesome description, isn't it?
+show_excerpts: true # set to true to show excerpts on the homepage
 
-# Author
-author:
-  name: Firat Kizilirmak
-  desc: Computer Engineer, pursuing MSc.<br>Interested in machine learning, and computer vision.
-  email: fkizilirmak@sabanciuniv.edu
-  selfie: assets/img/profile.png
-
-# social
-social:
-  email: true
-  behance:
-  medium: firatkizilirmak
-  bitbucket:
-  dribbble:
-  facebook:
-  flickr:
-  github: firatkizilirmakk
-  google_plus:
-  instagram:
-  keybase:
-  linkedin: https://www.linkedin.com/in/firatkizilirmak/
-  pinterest:
-  reddit:
-  soundcloud:
-  stack_exchange:
-  steam:
-  tumblr:
-  gitlab:
-  twitter:
-  vimeo:
-  wordpress:
-  youtube:
-  default_txt: "Follow On"
-
-# Build settings
-markdown: kramdown
-
-# Assets
+# Minima date format
+# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 sass:
   sass_dir: _sass
-  style: compressed
+plainwhite:
+  name: Fırat Kızılırmak
+  tagline: Computer Engineer.
+  date_format: "%b %-d, %Y"
+  sitemap: true # set to true to generate sitemap.xml content
+  search: true # set to true to enable searchbar
+  dark_mode: true # set to true to add dark mode toggle
+  portfolio_image: "assets/profile.png" # the path from the base directory of the site to the image to display (no / at the start)
+  html_lang: "en" # set the lang attribute of the <html> tag for the pages. See here for a list of codes: https://www.w3schools.com/tags/ref_country_codes.asp
+  condensed_mobile:
+    #- home
+    - page
+    - post
+  # generate social links in footer
+  social_links:
+    github:  firatkizilirmakk
+    linkedIn: in/firatkizilirmak
+    #dribbble: jekyll
+    #flickr:   jekyll
+    #instagram: jekyll
+    #pinterest: jekyll
+    #youtube: jekyll
+    #facebook: jekyll
+    #soundcloud: jekyll
+    #telegram: jekyll
+    #gitlab: jekyll
+    #email: jekyll
 
-# Gems
+    # Mastodon instances
+    # mastodon:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
+  navigation:
+    - title: About Me
+      url: "/about"
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
+
+# Build settings
+theme: plainwhite
+
 plugins:
-  - jekyll-paginate
-
-# Permalinks
-permalink: /:year-:month-:day/:title
-paginate_path: "/portfolio/page:num/"
-paginate: 5
-exclude:
-  - "Gemfile"
-  - "Gemfile.lock"
-  - "*.gem"
-  - "LICENSE"
-  - "READE.md"
-  - "screenshot.png"
+  - jekyll-seo-tag
+#  - jekyll-feed

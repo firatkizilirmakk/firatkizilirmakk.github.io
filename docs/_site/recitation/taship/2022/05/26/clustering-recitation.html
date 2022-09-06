@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Clustering Recitation</title>
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Clustering Recitation | Blog of Fırat Kızılırmak</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Clustering Recitation" />
+<meta name="author" content="firatkizilirmakk" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This blog consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course." />
+<meta property="og:description" content="This blog consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course." />
+<link rel="canonical" href="http://localhost:4000/recitation/taship/2022/05/26/clustering-recitation.html" />
+<meta property="og:url" content="http://localhost:4000/recitation/taship/2022/05/26/clustering-recitation.html" />
+<meta property="og:site_name" content="Blog of Fırat Kızılırmak" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-26T00:00:00+03:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Clustering Recitation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"firatkizilirmakk"},"dateModified":"2022-05-26T00:00:00+03:00","datePublished":"2022-05-26T00:00:00+03:00","description":"This blog consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course.","headline":"Clustering Recitation","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/recitation/taship/2022/05/26/clustering-recitation.html"},"url":"http://localhost:4000/recitation/taship/2022/05/26/clustering-recitation.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head><body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/profile.png" alt="Fırat Kızılırmak" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">Fırat Kızılırmak</a>
+      </h2>
+      </div><p class="tagline">Computer Engineer.</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/firatkizilirmakk" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="https://www.linkedin.com/in/firatkizilirmak" target="_blank">
+          <li>
+            <i class="icon-linkedin-squared"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/about">About Me</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2022</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <style>
+figure {
+  border: 1px #cccccc solid;
+  padding: 4px;
+  margin: auto;
+}
+
+figcaption {
+  background-color: rgb(255, 249, 249);
+  color: black;
+  font-style: italic;
+  padding: 4px;
+  text-align: center;
+}
+</style>
+
+<div class="post-container">
+  <a class="post-link" href="/recitation/taship/2022/05/26/clustering-recitation.html">
+    <h2 class="post-title">Clustering Recitation</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>May 26, 2022</div><ul class="post-categories"><li>Recitation</li><li>TAship</li></ul></div>
+  <div class="post">
+    <p>This blog consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course.</p>
+
+<hr />
+
+<h3 id="what-is-clustering">What is Clustering?</h3>
+
+<ul>
+  <li><strong>Put simply</strong>: Grouping examples based on their similarities, without any label.</li>
+  <li><strong>Wikipedia</strong> : Cluster analysis or clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense) to each other than to those in other groups (clusters).</li>
+</ul>
+
+<p align="center">
+	<img src="images/cluster-example.svg" width="400" /> 
+	<figcaption>from Wikipedia</figcaption>
+</p>
+
+<h2 id="types-of-clustering">Types of Clustering</h2>
+
+<p>There are several approaches developed for different clustering problems. For a detailed study, please take a look at <a href="https://link.springer.com/article/10.1007/s40745-015-0040-1">link</a> . Below given the mostly used algorithms.</p>
+
+<h3 id="centroid-based">Centroid based</h3>
+
+<p><strong>Wikipedia</strong>: Each cluster is represented by a central vector, <em>which is not necessarily a member of the data set</em>.
+Most common centroid based clustering algorithm is K-Means.</p>
+
+<p><strong>K-Means</strong>:</p>
+<ol>
+  <li>Specify number of clusters.</li>
+  <li>Initiliaze cluster centers randomly (for a better version, see K-Means++)</li>
+  <li>Assign each data point to its nearest cluster center</li>
+  <li>Revise cluster centers as the center of the datapoints belonging to that cluster</li>
+  <li>Repeat 3rd and 4th steps until convergence (???, either A or B, below)
+    <ol>
+      <li>The iteration will stop when the <strong>maximum number of iterations</strong> is reached</li>
+      <li>The change of <strong>within-cluster sum of squares</strong> in two successive iterations is less than the threshold value.</li>
+    </ol>
+  </li>
+</ol>
+
+<p align="center">
+	<img src="images/kmeans.gif" width="600" /> 
+	<figcaption>https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GIFs/</figcaption>
+</p>
+
+<p><strong>Pros</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Easy to understand &amp; implement
+2. Efficient
+3. Adaptible to large datasets
+</code></pre></div></div>
+
+<p><strong>Cons</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Requires # of clusters explicitly
+2. Troubled with finding clusters of varying size and densities
+3. Careful initialization needed, most of the time
+</code></pre></div></div>
+
+<h3 id="density-based">Density based</h3>
+
+<p><strong>GeeksforGeeks</strong>: Clusters are dense regions in a data space, separated by regions of the lower density of points.</p>
+
+<p>One of the mostly used density based algorithm is <strong>DBSCAN</strong> (Density-based spatial clustering of applications with noise). DBSCAN connects points within a certain region, which is defined by a radius, if there are enough number of points.</p>
+
+<p><strong>DBSCAN</strong>:</p>
+
+<ol>
+  <li>For each observation, look around their neighbours defined by <strong>eps</strong> value.
+    <ol>
+      <li>If there are at least <strong>minPts</strong> observations in that neighbourhood, mark this observation as <strong>Core</strong> point.</li>
+      <li>Otherwise, mark this observation as <strong>Non-Core</strong> point.</li>
+    </ol>
+  </li>
+  <li>Then, starting from a <strong>core</strong> point:
+    <ol>
+      <li>Include all the core points within the neighbourhood of the <strong>start core</strong> point.</li>
+      <li>Include all the other core points within the neighbourhoods of the <strong>core points</strong> included into the cluster.</li>
+    </ol>
+  </li>
+  <li>After adding all the <strong>core</strong> points into the cluster:
+    <ol>
+      <li>Include all the <strong>non-core</strong> points within neighbourhood of the <strong>core points</strong> of the cluster.</li>
+    </ol>
+  </li>
+  <li>If there are no reachable observations from the <strong>core points</strong> of the cluster:
+    <ol>
+      <li>Repeat the steps <strong>2-4</strong> through unvisited observations to find other clusters.</li>
+    </ol>
+  </li>
+  <li>Algorithm finishes when there is no unvisited observation.</li>
+</ol>
+
+<p align="center">
+	<img src="images/DBSCAN.gif" width="350" /> 
+	<figcaption>https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GIFs/</figcaption>
+</p>
+
+<p><strong>Pros</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Able to discover arbitrarily shaped clusters
+2. Robust to detecting outliers
+3. No need of specifying # clusters
+</code></pre></div></div>
+
+<p><strong>Cons</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Require two hyperparameters: eps and minPts
+2. Sensitive to these hyperparameters
+</code></pre></div></div>
+
+<h3 id="distribution-based">Distribution based</h3>
+
+<p><strong>Google Course</strong>: This clustering approach assumes data is composed of distributions, such as Gaussian distributions. <br />
+Clusters are defined as the objects belonging to the same probability distributions.</p>
+
+<p><strong>Example</strong> below shows three clusters as <strong>Gaussian</strong> distributions. Bands around the centers of the distributions indicate the probability of the data points to be in that distribution; <em>as the distance of a point to the center increases the probability for the point to belong to the cluster decreases</em>.</p>
+
+<p>Works best for <strong>synthetically generated data</strong> since they are usually drawn from distributions.</p>
+
+<p align="center">
+	<img src="images/DistributionClustering.svg" width="500" /> 
+	<figcaption>https://developers.google.com/machine-learning/clustering/clustering-algorithms</figcaption>
+</p>
+
+<h3 id="hierarchical">Hierarchical</h3>
+
+<p>This type of clustering is also known as connectivity-based clustering.</p>
+
+<p><strong>Wikipedia</strong>: This clustering method is based on the idea of objects being more related to nearby objects than to objects farther away. This connects “objects” to form “clusters” based on their <strong>distance</strong>.</p>
+
+<p>Two types of strategies:</p>
+<ol>
+  <li>Agglomerative:
+    <ol>
+      <li>Initially, each data point is a cluster itself.</li>
+      <li>Then, combines nearest clusters as new clusters.</li>
+      <li>Continue until:
+        <ol>
+          <li>There are specified number of clusters</li>
+          <li>All clusters combined into one</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>Divisive:
+    <ol>
+      <li>Initially, all data points are in one cluster.</li>
+      <li>Split the cluster or clusters into two, dissimilar clusters.</li>
+      <li>Continue until there are specified number of clusters.</li>
+    </ol>
+  </li>
+</ol>
+
+<p align="center">
+	<img src="images/HierarchicalClustering.gif" width="600" /> 
+	<figcaption>Example of Agglomerative Approach</figcaption>
+    <figcaption>https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GIFs/</figcaption>
+</p>
+
+<hr />
+
+<p align="center">
+	<img src="images/hieracrhical-3.png" width="600" /> 
+	<figcaption>Example of Three Clusters</figcaption>
+</p>
+
+<p><strong>Pros</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. No need of # clusters explicitly
+2. Easy to understand &amp; implement
+2. Dendograms provide insights about the data &amp; clusters
+</code></pre></div></div>
+
+<p><strong>Cons</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Sensitive to noisy data (e.g. with single linkage)
+2. Requires careful design of linkage method and distance matrix.
+3. Trouble with larger dimensional and/or bigger data 
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/firatkizilirmakk" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="https://www.linkedin.com/in/firatkizilirmak" target="_blank">
+          <li>
+            <i class="icon-linkedin-squared"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/about">About Me</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2022</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+  <script src="/assets/js/simple-jekyll-search.min.js"></script>
+  <script src="/assets/js/search.js"></script>
+  
+</body>
+
+</html>

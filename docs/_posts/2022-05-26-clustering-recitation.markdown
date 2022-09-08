@@ -5,7 +5,7 @@ date:   2022-05-26
 categories: Recitation TAship
 ---
 
-This blog consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course. 
+This post consists of notes from the notebook I prepared for a recitation I conducted in Sabanci University when I was a teaching assistant of the machine learning course. 
 
 ---
 
